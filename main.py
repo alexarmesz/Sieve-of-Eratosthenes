@@ -7,30 +7,28 @@ def sieve(n):
   for i in range (2, sqrtN):
     for j in range (i*2, n, i):
       list[j] = False
-  list = sieveValues(list)
-  return list
+  return [i for i, j in enumerate(list) if j]
 
-def sieveValues(list):
-  valsList = []
-  for i, j in enumerate(list):
-    if j == True:
-      valsList.append(i)
-  return valsList
-  
+def binary_search(arr, x):
+    low = 0
+    high = len(arr) - 1
+    mid = 0
+ 
+    while low <= high:
+ 
+      mid = (high + low) // 2
 
-def binarySearch(n, list, indexLow, indexHigh):
-  indexMid = int((indexLow+indexHigh)/2)
-  if list[indexMid] == n:
-    return indexMid
-  elif list[indexMid] < n:
-    return binarySearch(n, list, indexMid, indexHigh)
-  else:
-    return binarySearch(n, list, indexLow, indexMid)
-
+      if arr[mid] < x:
+        low = mid+1
+      if arr[mid] > x:
+        high = mid-1
+      else:
+        return mid
+    return -1
 
 if __name__ == "__main__":
-  list = sieve(1000000)
+  list = sieve(10000)
   print(list)
   
-  index = (binarySearch(97, list, 0, len(list)+1))
+  index = (binary_search(list, 97))
   print(f"index: {index}")
